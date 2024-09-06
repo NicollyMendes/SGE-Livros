@@ -41,7 +41,7 @@ def exibir_livros():
 
 
 # Função para realizar empréstimos
-def insert_loan(id_livro, id_usuario, data_emprestimo, data_devolucao):
+def insert_loan(id_usuario, id_livro, data_emprestimo, data_devolucao):
     conexao = connect()
     conexao.execute("INSERT INTO Emprestimos(id_livro, id_usuario, data_emprestimo, data_devolucao)\
                     VALUES(?, ?, ?, ?)", (id_livro, id_usuario, data_emprestimo, data_devolucao))
@@ -49,6 +49,7 @@ def insert_loan(id_livro, id_usuario, data_emprestimo, data_devolucao):
     conexao.close()
 
 #Funcao para exibir todos os livros emprestados no momento
+
 def get_books_on_loan():
     conexao = connect()
     resultado = conexao.execute("SELECT Emprestimos.id, Livros.titulo, Usuarios.nome, Usuarios.sobrenome, Emprestimos.data_emprestimo,Emprestimos.data_devolucao\
@@ -59,7 +60,7 @@ def get_books_on_loan():
 #com id_usuario(Emprestimos), onde se a data de devolucao do livro estiver vazia significa que ele ainda nao foi devolvido
     conexao.close()
     return resultado 
-print(get_books_on_loan())
+
 
 
 #Função para atualizar a data de devolucao do emprestimo
